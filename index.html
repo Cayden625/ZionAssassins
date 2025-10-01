@@ -13,9 +13,7 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <div class="logo-container">
-                    <div class="logo">
-                        <img src="https://page.gensparksite.com/v1/base64_upload/0ba36e3f47775e1544939d7039ded860" alt="Logo" width="24">
-                    </div>
+                    <div class="logo">⚡</div>
                     <span class="brand-text">Zion Assassins</span>
                 </div>
             </div>
@@ -107,7 +105,7 @@
                 </div>
 
                 <div class="feature-card" data-feature="electrolysis">
-                    <div class="feature-icon">⚡</div> <!-- keep original for Advanced Electrolysis -->
+                    <div class="feature-icon">⚡</div>
                     <h3 class="feature-title">Advanced Electrolysis</h3>
                     <p class="feature-description">Platinum electrodes split H₂O into pure oxygen and hydrogen, with nitrogen extraction from seawater compounds.</p>
                     <div class="feature-metric">
@@ -127,9 +125,7 @@
                 </div>
 
                 <div class="feature-card" data-feature="harvesting">
-                    <div class="feature-icon">
-                        <img src="https://page.gensparksite.com/v1/base64_upload/0ba36e3f47775e1544939d7039ded860" alt="Piezoelectric Icon" width="24">
-                    </div>
+                    <div class="feature-icon">🔋</div>
                     <h3 class="feature-title">Piezoelectric Harvesting</h3>
                     <p class="feature-description">Converts diver movement into electricity, reducing energy consumption while providing motion assistance.</p>
                     <div class="feature-metric">
@@ -161,15 +157,259 @@
         </div>
     </section>
 
+    <!-- System Visualization -->
+    <section id="system" class="system-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">System Architecture</h2>
+                <p class="section-subtitle">Complete integration of underwater oxygen generation and energy harvesting</p>
+            </div>
+
+            <div class="system-visualization">
+                <div class="system-container">
+                    <div class="suit-system">
+                        <div class="suit-outline">
+                            <div class="suit-component piezo" data-tooltip="Piezoelectric Harvesting: 1kWh">
+                                <div class="component-pulse"></div>
+                            </div>
+                            <div class="suit-component assist" data-tooltip="Motion Assistance System">
+                                <div class="component-pulse"></div>
+                            </div>
+                            <div class="suit-component sensors" data-tooltip="Biomechanical Sensors">
+                                <div class="component-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="processing-unit">
+                        <div class="unit-main">
+                            <div class="unit-screen">
+                                <div class="screen-content">
+                                    <div class="screen-line"></div>
+                                    <div class="screen-line"></div>
+                                    <div class="screen-line"></div>
+                                </div>
+                            </div>
+                            <div class="unit-vents">
+                                <div class="vent"></div>
+                                <div class="vent"></div>
+                                <div class="vent"></div>
+                            </div>
+                        </div>
+                        <div class="processing-flows">
+                            <div class="flow-input" data-tooltip="Seawater Input">
+                                <div class="flow-particles"></div>
+                            </div>
+                            <div class="flow-output-o2" data-tooltip="Oxygen Output">
+                                <div class="flow-particles oxygen"></div>
+                            </div>
+                            <div class="flow-output-n2" data-tooltip="Nitrogen Output">
+                                <div class="flow-particles nitrogen"></div>
+                            </div>
+                            <div class="flow-output-h2o" data-tooltip="Fresh Water Output">
+                                <div class="flow-particles water"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="energy-connections">
+                        <div class="connection primary"></div>
+                        <div class="connection secondary"></div>
+                        <div class="connection tertiary"></div>
+                    </div>
+                </div>
+
+                <div class="system-stats">
+                    <div class="stat-panel">
+                        <h4>Energy Balance</h4>
+                        <div class="energy-bar">
+                            <div class="energy-segment consumed" style="width: 37.5%;" data-tooltip="3kWh Consumed">
+                                <span>3kWh Used</span>
+                            </div>
+                            <div class="energy-segment generated" style="width: 62.5%;" data-tooltip="5kWh Generated">
+                                <span>5kWh Generated</span>
+                            </div>
+                        </div>
+                        <div class="net-energy">Net Gain: +2kWh</div>
+                    </div>
+
+                    <div class="stat-panel">
+                        <h4>Output Rates</h4>
+                        <div class="output-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">O₂</span>
+                                <span class="metric-value">Continuous</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">N₂</span>
+                                <span class="metric-value">On-demand</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">H₂O</span>
+                                <span class="metric-value">5L/hr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section id="specs" class="specifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Specifications</h2>
+                <p class="section-subtitle">Detailed performance metrics and system capabilities</p>
+            </div>
+
+            <div class="specs-grid">
+                <div class="spec-category">
+                    <h3 class="category-title">Power System</h3>
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <span class="spec-label">Total Power Consumption</span>
+                            <span class="spec-value">3 kWh</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Piezoelectric Generation</span>
+                            <span class="spec-value">1 kWh</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Cogeneration Output</span>
+                            <span class="spec-value">5 kWh</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Net Energy Gain</span>
+                            <span class="spec-value">+2 kWh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-category">
+                    <h3 class="category-title">Materials & Build</h3>
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <span class="spec-label">Primary Structure</span>
+                            <span class="spec-value">Aluminum (40m)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Exoskeleton Frame</span>
+                            <span class="spec-value">Carbon Fiber</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Electrodes</span>
+                            <span class="spec-value">Platinum/Graphite</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Weight</span>
+                            <span class="spec-value">Lightweight Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-category">
+                    <h3 class="category-title">Performance</h3>
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <span class="spec-label">Oxygen Production</span>
+                            <span class="spec-value">Continuous</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Nitrogen Extraction</span>
+                            <span class="spec-value">On-demand</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Fresh Water Output</span>
+                            <span class="spec-value">5 L/hour</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Operating Depth</span>
+                            <span class="spec-value">40+ meters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-category">
+                    <h3 class="category-title">Smart Features</h3>
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <span class="spec-label">AI Power Management</span>
+                            <span class="spec-value">Adaptive</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Motion Assistance</span>
+                            <span class="spec-value">Soft Robotics</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Real-time Monitoring</span>
+                            <span class="spec-value">24/7 Sensors</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Automation Level</span>
+                            <span class="spec-value">Fully Autonomous</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why This Matters</h2>
+                <p class="section-subtitle">Revolutionary impact on underwater exploration and sustainability</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔋</div>
+                    <h3>Energy Independence</h3>
+                    <p>Reduces dependence on traditional oxygen sources with renewable, self-sustaining technology.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">♻️</div>
+                    <h3>Zero Waste</h3>
+                    <p>Extracts useful chemicals directly from seawater, minimizing waste and utilizing natural resources.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>Advanced Tech</h3>
+                    <p>Pioneering energy harvesting technologies inspire future wearable tech across multiple industries.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🤖</div>
+                    <h3>Smart Automation</h3>
+                    <p>Automated processes create highly efficient systems with minimal manual intervention required.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌊</div>
+                    <h3>Extended Exploration</h3>
+                    <p>Uninterrupted oxygen supply enables longer underwater missions for research and rescue operations.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📱</div>
+                    <h3>Compact Design</h3>
+                    <p>Portable individual units make underwater activities more accessible than conventional systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="logo-container">
-                        <div class="logo">
-                            <img src="https://page.gensparksite.com/v1/base64_upload/0ba36e3f47775e1544939d7039ded860" alt="Footer Logo" width="24">
-                        </div>
+                        <div class="logo">⚡</div>
                         <span class="brand-text">Zion Assassins</span>
                     </div>
                     <p>Revolutionizing underwater exploration through sustainable technology.</p>
