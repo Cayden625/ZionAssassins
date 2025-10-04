@@ -781,3 +781,44 @@ if ('serviceWorker' in navigator) {
             .catch(error => console.log('SW registration failed'));
     });
 }
+
+
+// Add some fun interactions
+let konamiCode = [];
+const konamiSequence = [z,i,o,n]; // Up Up Down Down Left Right Left Right B A
+
+document.addEventListener('keydown', function(e) {
+    konamiCode.push(e.keyCode);
+    
+    if (konamiCode.length > konamiSequence.length) {
+        konamiCode = konamiCode.slice(-konamiSequence.length);
+    }
+    
+    if (konamiCode.length === konamiSequence.length && 
+        konamiCode.every((code, index) => code === konamiSequence[index])) {
+        
+        // Easter egg activated!
+        showNotification('🎉 BIG BANANA 🍌', 'success');
+        
+        // Add some fun effects
+        document.body.style.animation = 'rainbow 2s ease-in-out';
+        setTimeout(() => {
+            document.body.style.animation = '';
+        }, 2000);
+        
+        konamiCode = []; // Reset
+    }
+});
+
+// Add rainbow animation for easter egg
+const rainbowStyle = document.createElement('style');
+rainbowStyle.textContent = `
+    @keyframes rainbow {
+        0% { filter: hue-rotate(0deg); }
+        25% { filter: hue-rotate(90deg); }
+        50% { filter: hue-rotate(180deg); }
+        75% { filter: hue-rotate(270deg); }
+        100% { filter: hue-rotate(360deg); }
+    }
+`;
+document.head.appendChild(rainbowStyle);
