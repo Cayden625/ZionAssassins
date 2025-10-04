@@ -783,72 +783,101 @@ if ('serviceWorker' in navigator) {
 }
 
 
-let konamiCode = [];
-const konamiSequence = ['z', 'i', 'o', 'n'];
+// Add some fun interactions
+// Easter Egg: triggers on "ahdabest" or "28028"
+let secret = [];
+const targets = ["zion", "39"];
 
-document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.key.toLowerCase());
-    
-    if (konamiCode.length > konamiSequence.length) {
-        konamiCode = konamiCode.slice(-konamiSequence.length);
-    }
-    
-    if (konamiCode.join('') === konamiSequence.join('')) {
-        // Easter egg activated!
-        showNotification('🎉 BIG BANANA 🍌', 'success');
+document.addEventListener("keydown", e => {
+  secret.push(e.key.toLowerCase());
+  if (secret.length > 10) secret.shift();
 
-        // Rainbow flash
-        document.body.style.animation = 'rainbow 2s ease-in-out';
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 2000);
-
-        // Banana rain 🍌
-        startBananaRain();
-
-        konamiCode = []; // Reset
-    }
+  const typed = secret.join("");
+  if (targets.some(t => typed.endsWith(t))) {
+    activateEasterEgg();
+    secret = [];
+  }
 });
 
-// Rainbow animation
-const rainbowStyle = document.createElement('style');
-rainbowStyle.textContent = `
-    @keyframes rainbow {
-        0% { filter: hue-rotate(0deg); }
-        25% { filter: hue-rotate(90deg); }
-        50% { filter: hue-rotate(180deg); }
-        75% { filter: hue-rotate(270deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
-`;
-document.head.appendChild(rainbowStyle);
+function activateEasterEgg() {
+  // Notification
+  if (typeof showNotification === "function") {
+    showNotification("🎉 BIG BANANA 🍌", "success");
+  }
 
-// 🍌 Banana rain function
-function startBananaRain() {
-    for (let i = 0; i < 20; i++) {
-        const banana = document.createElement('div');
-        banana.textContent = '🍌';
-        banana.style.position = 'fixed';
-        banana.style.left = Math.random() * window.innerWidth + 'px';
-        banana.style.top = '-50px';
-        banana.style.fontSize = (20 + Math.random() * 30) + 'px';
-        banana.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
-        document.body.appendChild(banana);
+  // 🌈 Rainbow + Shake on whole page for 10s
+  document.body.style.animation = "rainbow 10s linear, shake 0.5s infinite";
+  document.documentElement.style.animation = "rainbow 10s linear, shake 0.5s infinite";
 
-        // remove after animation
-        setTimeout(() => banana.remove(), 5000);
-    }
+  // 📝 Floating Text (7s)
+  const floatingText = document.createElement("div");
+  floatingText.innerText = "BIG BANANA 🍌!";
+  floatingText.style.position = "fixed";
+  floatingText.style.top = "50%";
+  floatingText.style.left = "50%";
+  floatingText.style.transform = "translate(-50%, -50%)";
+  floatingText.style.fontSize = "3rem";
+  floatingText.style.fontWeight = "bold";
+  floatingText.style.color = "hsl(" + Math.random()*360 + ", 90%, 55%)";
+  floatingText.style.zIndex = 100000;
+  floatingText.style.pointerEvents = "none";
+  floatingText.style.animation = "spinText 3s linear 3";
+  document.body.appendChild(floatingText);
+  setTimeout(() => floatingText.remove(), 7000);
+
+  // 🍌 Banana rain spawner
+  const interval = setInterval(() => spawnBananas(10), 200);
+
+  // Stop after 10s
+  setTimeout(() => {
+    clearInterval(interval);
+    document.body.style.animation = "";
+    document.documentElement.style.animation = "";
+  }, 10000);
 }
 
-// Banana fall animation
-const bananaStyle = document.createElement('style');
-bananaStyle.textContent = `
-    @keyframes fall {
-        to {
-            transform: translateY(110vh) rotate(360deg);
-            opacity: 0;
-        }
-    }
+// ====== Styles ======
+const style = document.createElement("style");
+style.textContent = `
+@keyframes rainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+@keyframes shake {
+  0%,100% { transform: translate(0,0); }
+  25% { transform: translate(-10px,5px); }
+  50% { transform: translate(10px,-5px); }
+  75% { transform: translate(-5px,10px); }
+}
+@keyframes bananaFall {
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+@keyframes spinText {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(1080deg); }
+}
+.eg-banana {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  top: -50px;
+  animation: bananaFall linear forwards;
+}
 `;
-document.head.appendChild(bananaStyle);
+document.head.appendChild(style);
+
+// ====== Banana Rain ======
+function spawnBananas(count) {
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement("div");
+    el.className = "eg-banana";
+    el.textContent = "🍌";
+    el.style.left = Math.random() * window.innerWidth + "px";
+    el.style.fontSize = (20 + Math.random() * 40) + "px";
+    el.style.animationDuration = (Math.random() * 3 + 4) + "s"; // 4–7s
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 7000);
+  }
+}
 
