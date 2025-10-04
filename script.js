@@ -783,101 +783,79 @@ if ('serviceWorker' in navigator) {
 }
 
 
-// Add some fun interactions
-// Easter Egg: triggers on "ahdabest" or "28028"
+// Listen for secret code
 let secret = [];
-const targets = ["zion", "39"];
+const codes = ["zion", "39"];
 
 document.addEventListener("keydown", e => {
   secret.push(e.key.toLowerCase());
-  if (secret.length > 10) secret.shift();
+  if (secret.length > 20) secret.shift();
 
   const typed = secret.join("");
-  if (targets.some(t => typed.endsWith(t))) {
+  if (codes.some(c => typed.includes(c))) {
     activateEasterEgg();
     secret = [];
   }
 });
 
 function activateEasterEgg() {
-  // Notification
-  if (typeof showNotification === "function") {
-    showNotification("🎉 BIG BANANA 🍌", "success");
-  }
-
-  // 🌈 Rainbow + Shake on whole page for 10s
-  document.body.style.animation = "rainbow 10s linear, shake 0.5s infinite";
-  document.documentElement.style.animation = "rainbow 10s linear, shake 0.5s infinite";
-
-  // 📝 Floating Text (7s)
+  // BIG floating text
   const floatingText = document.createElement("div");
-  floatingText.innerText = "BIG BANANA 🍌!";
-  floatingText.style.position = "fixed";
-  floatingText.style.top = "50%";
-  floatingText.style.left = "50%";
-  floatingText.style.transform = "translate(-50%, -50%)";
-  floatingText.style.fontSize = "3rem";
-  floatingText.style.fontWeight = "bold";
-  floatingText.style.color = "hsl(" + Math.random()*360 + ", 90%, 55%)";
-  floatingText.style.zIndex = 100000;
-  floatingText.style.pointerEvents = "none";
-  floatingText.style.animation = "spinText 3s linear 3";
+  floatingText.innerText = "🍌 BIG BANANA 🍌";
+  Object.assign(floatingText.style, {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    fontSize: "8rem",
+    fontWeight: "900",
+    color: "yellow",
+    textShadow: "0 0 20px black, 0 0 40px orange, 0 0 60px red",
+    zIndex: "100000",
+    pointerEvents: "none",
+    opacity: "1",
+    animation: "spinText 3s linear infinite, fadeOut 10s forwards"
+  });
   document.body.appendChild(floatingText);
-  setTimeout(() => floatingText.remove(), 7000);
 
-  // 🍌 Banana rain spawner
-  const interval = setInterval(() => spawnBananas(10), 200);
+  setTimeout(() => floatingText.remove(), 10000);
 
-  // Stop after 10s
-  setTimeout(() => {
-    clearInterval(interval);
-    document.body.style.animation = "";
-    document.documentElement.style.animation = "";
-  }, 10000);
+  // Banana rain 🌧️🍌
+  const rainInterval = setInterval(() => {
+    const banana = document.createElement("div");
+    banana.innerText = "🍌";
+    Object.assign(banana.style, {
+      position: "fixed",
+      left: Math.random() * 100 + "vw",
+      top: "-5vh",
+      fontSize: (1.5 + Math.random() * 2.5) + "rem",
+      animation: `fallBanana ${3 + Math.random() * 4}s linear forwards`,
+      zIndex: "99999"
+    });
+    document.body.appendChild(banana);
+    setTimeout(() => banana.remove(), 8000);
+  }, 300);
+
+  // Stop rain after 10s
+  setTimeout(() => clearInterval(rainInterval), 10000);
 }
 
-// ====== Styles ======
+// Inject CSS animations
 const style = document.createElement("style");
 style.textContent = `
-@keyframes rainbow {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-@keyframes shake {
-  0%,100% { transform: translate(0,0); }
-  25% { transform: translate(-10px,5px); }
-  50% { transform: translate(10px,-5px); }
-  75% { transform: translate(-5px,10px); }
-}
-@keyframes bananaFall {
-  0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
 @keyframes spinText {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(1080deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
-.eg-banana {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99999;
-  top: -50px;
-  animation: bananaFall linear forwards;
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
 }
-`;
+@keyframes fallBanana {
+  from { transform: translateY(0); }
+  to { transform: translateY(110vh); }
+}`;
 document.head.appendChild(style);
 
-// ====== Banana Rain ======
-function spawnBananas(count) {
-  for (let i = 0; i < count; i++) {
-    const el = document.createElement("div");
-    el.className = "eg-banana";
-    el.textContent = "🍌";
-    el.style.left = Math.random() * window.innerWidth + "px";
-    el.style.fontSize = (20 + Math.random() * 40) + "px";
-    el.style.animationDuration = (Math.random() * 3 + 4) + "s"; // 4–7s
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 7000);
-  }
-}
 
