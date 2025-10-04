@@ -783,34 +783,34 @@ if ('serviceWorker' in navigator) {
 }
 
 
-// Add some fun interactions
 let konamiCode = [];
-const konamiSequence = [z,i,o,n]; // Up Up Down Down Left Right Left Right B A
+const konamiSequence = ['z', 'i', 'o', 'n'];
 
 document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.keyCode);
+    konamiCode.push(e.key.toLowerCase());
     
     if (konamiCode.length > konamiSequence.length) {
         konamiCode = konamiCode.slice(-konamiSequence.length);
     }
     
-    if (konamiCode.length === konamiSequence.length && 
-        konamiCode.every((code, index) => code === konamiSequence[index])) {
-        
+    if (konamiCode.join('') === konamiSequence.join('')) {
         // Easter egg activated!
         showNotification('🎉 BIG BANANA 🍌', 'success');
-        
-        // Add some fun effects
+
+        // Rainbow flash
         document.body.style.animation = 'rainbow 2s ease-in-out';
         setTimeout(() => {
             document.body.style.animation = '';
         }, 2000);
-        
+
+        // Banana rain 🍌
+        startBananaRain();
+
         konamiCode = []; // Reset
     }
 });
 
-// Add rainbow animation for easter egg
+// Rainbow animation
 const rainbowStyle = document.createElement('style');
 rainbowStyle.textContent = `
     @keyframes rainbow {
@@ -822,3 +822,33 @@ rainbowStyle.textContent = `
     }
 `;
 document.head.appendChild(rainbowStyle);
+
+// 🍌 Banana rain function
+function startBananaRain() {
+    for (let i = 0; i < 20; i++) {
+        const banana = document.createElement('div');
+        banana.textContent = '🍌';
+        banana.style.position = 'fixed';
+        banana.style.left = Math.random() * window.innerWidth + 'px';
+        banana.style.top = '-50px';
+        banana.style.fontSize = (20 + Math.random() * 30) + 'px';
+        banana.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+        document.body.appendChild(banana);
+
+        // remove after animation
+        setTimeout(() => banana.remove(), 5000);
+    }
+}
+
+// Banana fall animation
+const bananaStyle = document.createElement('style');
+bananaStyle.textContent = `
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(bananaStyle);
+
